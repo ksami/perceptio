@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var TestController = require('../controllers/TestController');
+var TestController = require('../controllers').Test;
 
 router.get('/form', TestController.getTest);
 router.post('/form', TestController.createTest);
