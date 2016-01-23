@@ -6,7 +6,7 @@ var FormController = {
 
   // POST /form
   create: (req, res, next)=>{
-    var match = Validator.isLineGraph(req.body);
+    var match = Validator.isTimeGraph(req.body);
     
     if(!match.result){
       res.send(respond(null, match.error));
@@ -21,6 +21,23 @@ var FormController = {
     }
 
     next();
+  },
+
+  // POST /form2
+  createTimeGraph: (req,res,next)=>{
+    var match = Validator.isTimeGraph(req.body);
+    
+    if(!match.result){
+      res.send(respond(null, match.error));
+    }
+    else{
+      var timeGraph = new Models.TimeGraph(req.body);
+      timeGraph.save()
+      .then(function(model){
+        console.log(model);
+        res.send(respond(timeGraph));
+      });
+    }
   }
 
 };

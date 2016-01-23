@@ -131,6 +131,37 @@ describe('API', ()=>{
         lines: [line1, line2]
       };
       return post('/form', data).then(res=>{
+        console.log(res.body);
+        assert.containSubset(res.body.data, data);
+      });
+    });
+  });
+
+  //////////
+  // Form2 //
+  //////////
+  describe('/form2', ()=>{
+    it('POST should return req.body', ()=>{
+      var line1 = {
+        nodes: [
+          {time: '2016-01-23T00:00:00.000Z', value: 20},
+          {time: '2016-01-23T00:00:10.000Z', value: 30},
+          {time: '2016-01-23T00:00:20.000Z', value: 40}
+        ],
+        color: 'ff0000'
+      };
+      var line2 = {
+        nodes: [
+          {time: '2016-01-23T00:00:00.000Z', value: 10},
+          {time: '2016-01-23T00:00:10.000Z', value: 30},
+          {time: '2016-01-23T00:00:20.000Z', value: 20}
+        ],
+        color: '00ff00'
+      };
+      var data = {
+        lines: [line1, line2]
+      };
+      return post('/form2', data).then(res=>{
         assert.containSubset(res.body.data, data);
       });
     });
