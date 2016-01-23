@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-
-        <style>
+head
+    title hello
+    style.
         body {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
@@ -31,44 +28,30 @@
             stroke: black;
             stroke-width: 1.5;
         }
-        </style>
-    </head>
-    <body>
-        <div class="graph"></div>
 
-        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="http://d3js.org/d3.v3.min.js"></script>
-        <script>
+body
+    .graph
+
+    script(src="http://code.jquery.com/jquery-1.11.3.min.js")
+    script(src="http://d3js.org/d3.v3.min.js")
+    
+    script.
         var limit = 60 * 1,
-            duration = 750,
+            duration = #{duration},
             now = new Date(Date.now() - duration)
 
-        var width = 500,
-            height = 200
+        var width = #{size.width},
+            height = #{size.height};
 
-        var groups = {
-            current: {
+        //- var groups = {
+            var group = {
                 value: 0,
-                color: 'orange',
-                data: d3.range(limit).map(function() {
-                    return 0
-                })
-            },
-            target: {
-                value: 0,
-                color: 'green',
-                data: d3.range(limit).map(function() {
-                    return 0
-                })
-            },
-            output: {
-                value: 0,
-                color: 'grey',
+                color: '#{color}',
                 data: d3.range(limit).map(function() {
                     return 0
                 })
             }
-        }
+        //- }
 
         var x = d3.time.scale()
             .domain([now - (limit - 2), now - duration])
@@ -99,13 +82,13 @@
 
         var paths = svg.append('g')
 
-        for (var name in groups) {
-            var group = groups[name]
+        //- for (var name in groups) {
+            //- var group = groups[name]
             group.path = paths.append('path')
                 .data([group.data])
                 .attr('class', name + ' group')
                 .style('stroke', group.color)
-        }
+        //- }
 
         // var timer = setInterval(function(){
         //     tick(20 + Math.random() * 100);
@@ -131,12 +114,12 @@
             now = new Date()
 
             // Add new values
-            for (var name in groups) {
-                var group = groups[name]
+            //- for (var name in groups) {
+                //- var group = groups[name]
                 //group.data.push(group.value) // Real values arrive at irregular intervals
-                group.data.push(data[name])
+                group.data.push(data['output'])
                 group.path.attr('d', line)
-            }
+            //- }
 
             // Shift domain
             x.domain([now - (limit - 2) * duration, now - duration])
@@ -156,7 +139,7 @@
                 .ease('linear')
                 .attr('transform', 'translate(' + x(now - (limit - 1) * duration) + ')')
                 .each('end', function(){
-                    $.get('https://dweet.io:443/get/latest/dweet/for/c6h12o6c6h12o6', function(json){
+                    $.get('#{url}', function(json){
                         var data = json.with[0].content;
                         // console.log(data);
                         tick(data);
@@ -164,10 +147,10 @@
                 });
 
             // Remove oldest data point from each group
-            for (var name in groups) {
-                var group = groups[name]
+            //- for (var name in groups) {
+                //- var group = groups[name]
                 group.data.shift()
-            }
+            //- }
         }
 
         tick({
@@ -176,6 +159,3 @@
             current: 0
         });
 
-        </script>
-    </body>
-</html>
