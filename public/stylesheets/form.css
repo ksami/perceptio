@@ -1,10 +1,11 @@
-/*general*/
+/* general */
 
 html, body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
+  background: #eeeeee;
 }
 
 .container-fluid {
@@ -13,23 +14,71 @@ html, body {
   padding: 0px;
 }
 
-.axis path, .axis line
-{
-    fill: none;
-    stroke: #777;
-    shape-rendering: crispEdges;
+/* draw d3 chart */
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #777;
+  shape-rendering: crispEdges;
 }
 
-.axis text
-{
-    font-family: 'Arial';
-    font-size: 13px;
+.axis text {
+  font-family: 'Arial';
+  font-size: 13px;
 }
-.tick
-{
-    stroke-dasharray: 1, 2;
+
+.tick {
+  stroke-dasharray: 1, 2;
 }
-.bar
-{
-    fill: FireBrick;
+
+.bar {
+  fill: FireBrick;
+}
+
+/* form */
+
+.logo {
+	margin-top: 40px;
+	height: 150px;
+	width: 150px;
+	background-size: 150px 150px;
+	background-image: url("/images/logo.png");
+	border-radius: 30px;
+	border: solid #bdbdbd 2px;
+	background-color: #f5f5f5;
+}
+
+.center  {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+	font-family: 'Play', sans-serif;
+	font-weight: 700;
+}
+
+.form-table {
+	font-family: 'Play', sans-serif;
+	font-weight: 700;
+	font-size: 18px;
+	color: #616161;
+
+	width: 40%;
+	background-color: #ffffff;
+	margin-top: 15px;
+	border-radius: 20px;
+	border: solid 1px #bdbdbd;
+}
+
+.inner-contents {
+	padding: 20px;
+}
+
+#file {
+	font-family: 'Play', sans-serif !important;
+	font-weight: 500 !important;
+	font-size: 14px !important;
+	color: #616161 !important;
 }
