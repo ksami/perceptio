@@ -22,3 +22,5 @@ node_modules
 
 # Mongo database directory
 data
+
+.DS_STORE
