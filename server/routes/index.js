@@ -1,11 +1,7 @@
-var express = require('express');
-var router = express.Router();
+var apiRouter = require('./api');
+var formRouter = require('./form');
 
-var TestController = require('../controllers/TestController');
-
-router.get('/test', TestController.getTest);
-router.post('/test', TestController.createTest);
-router.put('/test/:id', TestController.updateTest);
-router.delete('/test/:id', TestController.deleteTest);
-
-module.exports = router;
+module.exports = {
+  api: apiRouter,
+  form: formRouter
+};
