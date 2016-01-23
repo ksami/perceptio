@@ -7,6 +7,7 @@ chai.use(chaiSubset);
 chai.config.includeStack = true;
 
 var superagent = require('superagent');
+var fs = require('fs');
 
 
 
@@ -105,6 +106,11 @@ describe('API', ()=>{
   });
 
 
+  // describe('/api/linegraph', ()=>{
+  //   it('GET should give graph')
+  // })
+
+
 
   //////////
   // Form //
@@ -131,8 +137,9 @@ describe('API', ()=>{
         lines: [line1, line2]
       };
       return post('/form', data).then(res=>{
-        console.log(res.body);
-        assert.containSubset(res.body.data, data);
+        assert.isDefined(res.body);
+        // assert.isUndefined(fs.writeFileSync('out.png', res.body, 'base64'));
+        // assert.containSubset(res.body.data, data);
       });
     });
   });
@@ -163,6 +170,7 @@ describe('API', ()=>{
       };
       return post('/form2', data).then(res=>{
         assert.containSubset(res.body.data, data);
+
       });
     });
   });
