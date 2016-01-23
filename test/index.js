@@ -1,7 +1,9 @@
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
+var chaiSubset = require('chai-subset')
 var assert = chai.assert;
 chai.use(chaiAsPromised);
+chai.use(chaiSubset);
 chai.config.includeStack = true;
 
 var superagent = require('superagent');
@@ -22,7 +24,7 @@ describe('API', ()=>{
     get = function(url){
       return new Promise((resolve, reject)=>{
         superagent
-        .get('http://localhost:8080/api'+url)
+        .get('http://localhost:8080'+url)
         .accept('json')
         .end((err, res)=>{
           err ? reject(err) : resolve(res);
@@ -39,7 +41,7 @@ describe('API', ()=>{
     post = function(url, data){
       return new Promise((resolve, reject)=>{
         superagent
-        .post('http://localhost:8080/api'+url)
+        .post('http://localhost:8080'+url)
         .type('json')
         .send(data)
         .end((err, res)=>{
@@ -51,7 +53,7 @@ describe('API', ()=>{
     put = function(url, data){
       return new Promise((resolve, reject)=>{
         superagent
-        .put('http://localhost:8080/api'+url)
+        .put('http://localhost:8080'+url)
         .type('json')
         .send(data)
         .end((err, res)=>{
@@ -63,7 +65,7 @@ describe('API', ()=>{
     del = function(url){
       return new Promise((resolve, reject)=>{
         superagent
-        .del('http://localhost:8080/api'+url)
+        .del('http://localhost:8080'+url)
         .end((err, res)=>{
           err ? reject(err) : resolve(res);
         });
@@ -77,30 +79,61 @@ describe('API', ()=>{
   //////////
   describe('/api/test', ()=>{
     it('GET should successfully return message', ()=>{
-      return get('/test').then(res=>{
+      return get('/api/test').then(res=>{
         assert.equal(res.body.text, 'GET /api/test successful');
       });
     });
     it('POST should successfully return message', ()=>{
       var data = {msg: 'hello world!'};
-      return post('/test', data).then(res=>{
+      return post('/api/test', data).then(res=>{
         assert.equal(res.body.text, 'POST /api/test successful');
         assert.deepEqual(res.body.data, data);
       });
     });
     it('PUT should successfully return message', ()=>{
       var data = {msg: 'hello world!'};
-      return put('/test/1', data).then(res=>{
+      return put('/api/test/1', data).then(res=>{
         assert.equal(res.body.text, 'PUT /api/test/1 successful');
         assert.deepEqual(res.body.data, data);
       });
     });
     it('DELETE should successfully return message', ()=>{
-      return del('/test/1').then(res=>{
+      return del('/api/test/1').then(res=>{
         assert.equal(res.body.text, 'DELETE /api/test/1 successful');
       });
     });
   });
 
+
+
+  //////////
+  // Form //
+  //////////
+  describe('/form', ()=>{
+    it('POST should return req.body', ()=>{
+      var line1 = {
+        nodes: [
+          {x: 20, y: 20},
+          {x: 30, y: 30},
+          {x: 40, y: 40}
+        ],
+        color: 'ff0000'
+      };
+      var line2 = {
+        nodes: [
+          {x: 10, y: 10},
+          {x: 20, y: 30},
+          {x: 40, y: 20}
+        ],
+        color: '00ff00'
+      };
+      var data = {
+        lines: [line1, line2]
+      };
+      return post('/form', data).then(res=>{
+        assert.containSubset(res.body.data, data);
+      });
+    });
+  });
 
 });

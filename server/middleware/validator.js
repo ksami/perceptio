@@ -3,8 +3,10 @@ lodash = require('lodash');
 module.exports = {
   /**
    * Check if fulfill model for linegraph
-   * @param  {[type]}  arg [description]
-   * @return {Boolean}     [description]
+   * @param  {Object}  arg linegraph model
+   * @return {Object}  result
+   * @return {Boolean} result.result true if is a line graph
+   * @return {String} result.error error message
    */
   isLineGraph: function(arg){
   	
@@ -13,22 +15,22 @@ module.exports = {
   		//check for color ,if no exist, dafault String
 	  	var isColor  = /^#[0-9A-F]{6}$/i.test(arg[i].color);
 
-	  	if (isColor == false) {
-	  		arg[i].color = "FFFFFF"
+	  	if (isColor === false) {
+	  		arg[i].color = '000000';
 	  	}
 	  	//check if nodes is array of nodes of 2 elements??
 
 	  	//check if x is number
 	  	if (!_.isNumber(arg[i].nodes[0].x)) {
-	  		return "err x";
+	  		return {result: false, error: 'err x'};
 	  	}
 	  	//check if y is number
 	  	if (!_.isNumber(arg[i].nodes[0].y)) {
-	  		return "err y";
+	  		return {result: false, error: 'err y'};
 	  	}
 
   	}
-  	return true;
+  	return {result: true, error: null};
 
   }
 

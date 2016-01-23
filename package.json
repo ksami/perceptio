@@ -20,6 +20,7 @@
   "devDependencies": {
     "chai": "^3.4.1",
     "chai-as-promised": "^5.2.0",
+    "chai-subset": "^1.2.0",
     "mocha": "^2.3.4",
     "superagent": "^1.7.0"
   }
