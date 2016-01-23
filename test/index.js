@@ -115,7 +115,6 @@ describe('API', ()=>{
         color: 'orange'
       };
       return post('/api/realtime', data).then(res=>{
-        console.log(res.body);
         assert.isString(res.body.data);
       });
     });
@@ -126,36 +125,36 @@ describe('API', ()=>{
   //////////
   // Form //
   //////////
-  describe('/form', ()=>{
-    it('POST should return req.body', ()=>{
-      var line1 = {
-        nodes: [
-          {x: 20, y: 20},
-          {x: 30, y: 30},
-          {x: 40, y: 40}
-          // {x: 100, y: 60}
-        ],
-        color: 'ff0000'
-      };
-      var line2 = {
-        nodes: [
-          {x: 20, y: 40},
-          {x: 30, y: 30},
-          {x: 40, y: 20}
-        ],
-        color: '0000ff'
-      };
-      var data = {
-        size: {width: 200, height: 200},
-        lines: [line1, line2]
-      };
-      return post('/form', data).then(res=>{
-        assert.isDefined(res.body);
-        assert.isUndefined(fs.writeFileSync('out.png', res.body, 'base64'));
-        // assert.containSubset(res.body.data, data);
-      });
-    });
-  });
+  // describe('/form', ()=>{
+  //   it('POST should return req.body', ()=>{
+  //     var line1 = {
+  //       nodes: [
+  //         {x: 20, y: 20},
+  //         {x: 30, y: 30},
+  //         {x: 40, y: 40}
+  //         // {x: 100, y: 60}
+  //       ],
+  //       color: 'ff0000'
+  //     };
+  //     var line2 = {
+  //       nodes: [
+  //         {x: 20, y: 40},
+  //         {x: 30, y: 30},
+  //         {x: 40, y: 20}
+  //       ],
+  //       color: '0000ff'
+  //     };
+  //     var data = {
+  //       size: {width: 200, height: 200},
+  //       lines: [line1, line2]
+  //     };
+  //     return post('/form', data).then(res=>{
+  //       assert.isDefined(res.body);
+  //       assert.isUndefined(fs.writeFileSync('out.png', res.body, 'base64'));
+  //       // assert.containSubset(res.body.data, data);
+  //     });
+  //   });
+  // });
 
   //////////
   // Form2 //

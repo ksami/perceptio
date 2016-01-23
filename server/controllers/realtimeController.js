@@ -16,9 +16,6 @@ var RealtimeController = {
     Models.RealtimeGraph.create(req.body)
     .then(function(model){
       res.send(respond(model._id));
-    })
-    .catch(function(err){
-      res.send(respond(null, err));
     });
   }
 };
