@@ -5,7 +5,6 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', sans-serif;
 
   color: white;
 }
@@ -24,19 +23,25 @@ ul > li:last-child {
   padding: 0px;
 }
 
+.hover-text:hover {
+  color: #e4b363 !important;
+}
+
 /* navbar */
 
 .navbar{
   position: fixed;
   top: 0;
   width: 100%;
+  color: #212121;
 
-  background-color: transparent;
+  background-color: #e0e0e0;
   border-color: transparent;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .navbar-header h2 {
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 .brand-logo {
@@ -51,21 +56,17 @@ ul > li:last-child {
 }
 
 .navbar-item a {
+  font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   letter-spacing: 3px;
-  margin-top: 25px;
-  color: white;
+  margin-top: 15px;
 
   padding-left: 0px;
   padding-right: 0px;
 }
 
-.current-scroll {
-  color: #e4b363 !important;
-}
-
 .navbar-default .navbar-nav>li>a {
-  color: white;
+  color: #212121;;
 }
 
 .navbar-nav>li>a {
@@ -78,12 +79,48 @@ ul > li:last-child {
 .section {
   width: 100%;
   height: 100%;
+  padding-top: 250px;
 }
 
 #about {
-  background-image: url("/images/background.jpg");
+  background-image: url("/images/bg2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+
+  font-family: 'Lato', sans-serif;
+}
+
+.tag-line {
+  margin-top: 0px;
+  letter-spacing: 5px;
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.tag-info {
+  margin-top: 50px;
+  font-size: 40px;
+  margin-left: 20%;
+  margin-right: 20%;
+  line-height: 50px;
+  letter-spacing: 3px;
+}
+
+.getting-started-button {
+  background: #E0DFD5;
+  border-radius: 8px;
+  font-size: 30px;
+  color: #313637;
+  letter-spacing: 3.66px;
+  line-height: 27px;
+  font-weight: 500;
+  letter-spacing: 3px;
+
+  padding: 30px 40px;
+
+  display: block;
+  margin: 0 auto;
+  margin-top: 80px;
 }
 
 
