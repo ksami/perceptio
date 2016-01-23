@@ -122,23 +122,25 @@ describe('API', ()=>{
           {x: 20, y: 20},
           {x: 30, y: 30},
           {x: 40, y: 40}
+          // {x: 100, y: 60}
         ],
         color: 'ff0000'
       };
       var line2 = {
         nodes: [
-          {x: 10, y: 10},
-          {x: 20, y: 30},
+          {x: 20, y: 40},
+          {x: 30, y: 30},
           {x: 40, y: 20}
         ],
-        color: '00ff00'
+        color: '0000ff'
       };
       var data = {
+        size: {width: 200, height: 200},
         lines: [line1, line2]
       };
       return post('/form', data).then(res=>{
         assert.isDefined(res.body);
-        // assert.isUndefined(fs.writeFileSync('out.png', res.body, 'base64'));
+        assert.isUndefined(fs.writeFileSync('out.png', res.body, 'base64'));
         // assert.containSubset(res.body.data, data);
       });
     });
@@ -147,32 +149,33 @@ describe('API', ()=>{
   //////////
   // Form2 //
   //////////
-  describe('/form2', ()=>{
-    it('POST should return req.body', ()=>{
-      var line1 = {
-        nodes: [
-          {time: '2016-01-23T00:00:00.000Z', value: 20},
-          {time: '2016-01-23T00:00:10.000Z', value: 30},
-          {time: '2016-01-23T00:00:20.000Z', value: 40}
-        ],
-        color: 'ff0000'
-      };
-      var line2 = {
-        nodes: [
-          {time: '2016-01-23T00:00:00.000Z', value: 10},
-          {time: '2016-01-23T00:00:10.000Z', value: 30},
-          {time: '2016-01-23T00:00:20.000Z', value: 20}
-        ],
-        color: '00ff00'
-      };
-      var data = {
-        lines: [line1, line2]
-      };
-      return post('/form2', data).then(res=>{
-        assert.containSubset(res.body.data, data);
+  // describe('/form2', ()=>{
+  //   it('POST should return req.body', ()=>{
+  //     var line1 = {
+  //       nodes: [
+  //         {time: '2016-01-23T00:00:00.000Z', value: 20},
+  //         {time: '2016-01-23T00:00:10.000Z', value: 30},
+  //         {time: '2016-01-23T00:00:20.000Z', value: 40}
+  //       ],
+  //       color: 'ff0000'
+  //     };
+  //     var line2 = {
+  //       nodes: [
+  //         {time: '2016-01-23T00:00:00.000Z', value: 10},
+  //         {time: '2016-01-23T00:00:10.000Z', value: 30},
+  //         {time: '2016-01-23T00:00:20.000Z', value: 20}
+  //       ],
+  //       color: '00ff00'
+  //     };
+  //     var data = {
+  //       size: {width: 200, height: 200},
+  //       lines: [line1, line2]
+  //     };
+  //     return post('/form2', data).then(res=>{
+  //       assert.containSubset(res.body.data, data);
 
-      });
-    });
-  });
+  //     });
+  //   });
+  // });
 
 });

@@ -19,7 +19,7 @@ var types = {
  * @param  {String} type type of model
  * @return {Buffer|undefined}      Base64 encoded buffer or undefined if failed
  */
-module.exports = function(type, cb){
+module.exports = function(type, params, cb){
   // pass the html stub to jsDom
   jsdom.env({
     features: {QuerySelector: true},
@@ -30,11 +30,12 @@ module.exports = function(type, cb){
       var container = window.document.querySelector('#dataviz');
 
 
-      var width = 200,
-          height = 200;
+      var width = params.size.width,
+          height = params.size.height,
+          lines = params.lines;
 
       //draw using d3
-      types[type](width, height, container);
+      types[type](width, height, lines, container);
 
 
       // save result in an html file

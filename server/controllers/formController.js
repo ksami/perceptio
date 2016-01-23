@@ -14,7 +14,7 @@ var FormController = {
       next();
     }
     else{
-      draw('lineGraph', function(img){
+      draw('lineGraph', req.body, function(img){
         res.set('Content-Type', 'image/png');
         res.set('Content-Length', img.length);
         res.send(img);
