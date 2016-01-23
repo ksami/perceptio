@@ -21,8 +21,13 @@ ul > li:last-child {
   padding: 0px;
 }
 
+.hover-text {
+  padding: 17px !important;
+}
+
 .hover-text:hover {
-  color: #e4b363 !important;
+  /*color: #e4b363 !important;*/
+  border-bottom: solid 3px #424242;
 }
 
 /* navbar */
@@ -48,15 +53,17 @@ ul > li:last-child {
 
 .brand-name {
   font-family: 'Exo', sans-serif;
-  letter-spacing: 3px;
+  /*letter-spacing: 3px;*/
   font-size: 32px;
   margin-left: 10px;
+  text-decoration: none !important;
+  color: #212121 !important;
 }
 
 .navbar-item a {
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
-  letter-spacing: 3px;
+  /*letter-spacing: 3px;*/
   margin-top: 15px;
 
   padding-left: 0px;
@@ -123,12 +130,12 @@ ul > li:last-child {
   border-radius: 8px;
   font-size: 30px;
   color: #ffffff;
-  letter-spacing: 3.66px;
+  /*letter-spacing: 3.66px;*/
   line-height: 27px;
   font-weight: 500;
-  letter-spacing: 3px;
+  /*letter-spacing: 3px;*/
 
-  padding: 30px 40px;
+  padding: 50px;
 
   /*display: block;*/
   margin: 0 auto;
@@ -169,7 +176,7 @@ ul > li:last-child {
 
 #getting-started .title {
   margin-top: 0px;
-  letter-spacing: 3px;
+  /*letter-spacing: 3px;*/
   font-size: 50px;
   padding-bottom: 5px;
 }
@@ -183,7 +190,7 @@ ul > li:last-child {
 }
 
 #getting-started .half-section-title {
-  letter-spacing: 3px;
+  /*letter-spacing: 3px;*/
 }
 
 .static-section {
