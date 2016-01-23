@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="libs/bootstrap/css/bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="stylesheets/form.css" />
   <link href='https://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
+
 </head>
 
 <body>
@@ -24,53 +25,79 @@
   <div class="title text-center"><h1>Perceptio Your Data</h1></div>
 
   <div class="center">
-    <div class="form-table">
+    <div class="form-table" ng-app="formApp" ng-controller="formController">
       <div class="inner-contents">
 
-        <form>
+        <form id="form">
+
           <div class="form-group">
-
             <label for="graphType">Graph Type</label>
-            <select class="form-control">
-              <option>Static</option>
-              <option>Dynamic</option>
+            <select class="form-control" ng-model="type">
+              <option value="static">Static</option>
+              <option value="dynamic">Dynamic</option>
             </select>
+          </div>
 
-            <br>
-
+          <div class="form-group">
             <label for="graphColor">Graph Color</label>
-            <select class="form-control">
-            <option>Red</option>
-            <option>Orange</option>
-            <option>Yellow</option>
-            <option>Green</option>
-            <option>Blue</option>
-            <option>Purple</option>
+            <select class="form-control" ng-model="color">
+              <option value="#f44336">Red</option>
+              <option value="#ff9800">Orange</option>
+              <option value="#ffeb3b">Yellow</option>
+              <option value="#267d32">Green</option>
+              <option value="#156fc0">Blue</option>
+              <option value="#673ab7">Purple</option>
             </select>
+          </div>
 
-            <br>
-
+          <div class="form-group">
             <label for="graphHeight">Height (in cm)</label>
-            <input type="height" class="form-control" id="height" placeholder="eg. '10'">
+            <input type="height" class="form-control" id="height" placeholder="eg. '10'" ng-model="height">
+          </div>
 
-            <br>
-
+          <div class="form-group">
             <label for="graphWidth">Width (in cm)</label>
-            <input type="width" class="form-control" id="width" placeholder="eg. '10'">
+            <input type="width" class="form-control" id="width" placeholder="eg. '10'" ng-model="width">
+          </div>
 
-            <br>
-
+          <div class="form-group" ng-show="isStatic()">
             <label for="graphData">Your Data</label>
-            <input type="file" id="file">
+            <input type="file" id="file" custom-on-change="uploadFile">
+          </div>
 
-            <br>
+          <div class="form-group" ng-show="isDynamic()">
+            <label for="graphUrl">Your Url</label>
+            <input class="form-control" id="url" placeholder="eg. 'www.google.com'" ng-model="url">
+          </div>
 
-            <div class="center">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-
+          <div class="center">
+            <button type="submit" class="btn" id="submit-btn" ng-class="isAllInputsFilled() ? 'btn-primary' : 'btn-default inactive'">
+              Submit
+            </button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="graph-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Graph</h4>
+        </div>
+        <div class="modal-body">
+          <div class="center">
+            <div id="graph-container"></div>
+          </div>
+          <div class="center">
+            <button class="btn btn-warning export-btn" id="export-button">
+              <img src="images/export.png" width="20" height="20"/>
+              Export to Image
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -78,10 +105,14 @@
   <!-- js libraries -->
   <script type="text/javascript" src="libs/jquery/jquery-1.12.0.min.js"></script>
   <script type="text/javascript" src="libs/bootstrap/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="libs/angular/angular.min.js"></script>
   <script type="text/javascript" src="libs/d3/d3.min.js"></script>
+  <script type="text/javascript" src="libs/angular/angular.min.js"></script>
+  <script type="text/javascript" src="libs/angular/angular-route.min.js"></script>
+  <script type="text/javascript" src="libs/saveSvgAsPng/saveSvgAsPng.js"></script>
 
+  <script src="javascripts/form-angular.js"></script>
   <script type="text/javascript" src="javascripts/form.js"></script>
+
 
 </body>
 
