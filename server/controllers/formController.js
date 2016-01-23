@@ -47,7 +47,7 @@ var FormController = {
 
   // Get
   render: (req, res, next)=> {
-    res.sendFile(path.join(__dirname + '/public/form.html'));
+    res.sendFile(path.join(__dirname + '../../public/form.html'));
     next();
   }
 
