@@ -1,7 +1,7 @@
-var Graph = require('./graphController');
+var Form = require('./formController');
 var Test = require('./testController');
 
 module.exports = {
-  Graph,
+  Form,
   Test
 };

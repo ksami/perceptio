@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var TestController = require('../controllers').Test;
+var FormController = require('../controllers').Form;
 
-router.get('/form', TestController.getTest);
-router.post('/form', TestController.createTest);
-router.put('/form/:id', TestController.updateTest);
-router.delete('/form/:id', TestController.deleteTest);
+router.post('/form', FormController.create);
 
 module.exports = router;
