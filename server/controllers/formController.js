@@ -1,10 +1,16 @@
 var Models = require('../models');
+var respond = require('./apiResponse');
 
 var FormController = {
 
   // POST /form
   create: (req, res, next)=>{
-    res.send({text: 'POST /api/test successful', data: req.body, received_at: new Date()});
+    var lineGraph =  new Models.LineGraph(req.body);
+    lineGraph.save()
+    .then(function(model){
+      console.log(model);
+      res.send(respond(lineGraph));
+    });
     next();
   }
 
