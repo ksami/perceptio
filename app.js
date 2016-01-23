@@ -17,7 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set route controllers
-app.use('/api', router);
+app.use('/', router.form);
+app.use('/api', router.api);
 
 
 // connect to test database
