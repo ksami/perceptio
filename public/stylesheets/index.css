@@ -128,9 +128,15 @@ ul > li:last-child {
 
   padding: 30px 40px;
 
-  display: block;
+  /*display: block;*/
   margin: 0 auto;
   margin-top: 80px;
+}
+
+.text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*getting started*/
@@ -170,5 +176,3 @@ ul > li:last-child {
 .static-section {
 
 }
-
-
