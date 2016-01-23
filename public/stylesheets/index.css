@@ -56,6 +56,8 @@ ul > li:last-child {
   /*letter-spacing: 3px;*/
   font-size: 32px;
   margin-left: 10px;
+  text-decoration: none !important;
+  color: #212121 !important;
 }
 
 .navbar-item a {
@@ -133,7 +135,7 @@ ul > li:last-child {
   font-weight: 500;
   /*letter-spacing: 3px;*/
 
-  padding: 30px 40px;
+  padding: 50px;
 
   /*display: block;*/
   margin: 0 auto;
