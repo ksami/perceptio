@@ -1,6 +1,7 @@
 var Models = require('../models');
 var respond = require('./apiResponse');
 var Validator = require('../middleware/validator');
+var draw = require('../draw');
 
 var FormController = {
 
@@ -10,17 +11,17 @@ var FormController = {
     
     if(!match.result){
       res.send(respond(null, match.error));
+      next();
     }
     else{
-      var lineGraph =  new Models.LineGraph(req.body);
-      lineGraph.save()
-      .then(function(model){
-        console.log(model);
-        res.send(respond(lineGraph));
+      draw('lineGraph', function(img){
+        res.set('Content-Type', 'image/png');
+        res.set('Content-Length', img.length);
+        res.send(img);
+        next();
       });
-    }
 
-    next();
+    }
   }
 
 };

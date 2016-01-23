@@ -10,10 +10,10 @@ if (system.args.length === 3) {
     height: system.args[2]
   };
   page.content = system.args[3];
-  page.render('d3.png');
+  // page.render('d3.png');
 
-  // var results = 'data:image/png;base64,' + page.renderBase64('d3test.png');
-  // system.stdout.write(results);
+  var results = 'data:image/png;base64,' + page.renderBase64('PNG');
+  system.stdout.write(results);
 }
 
 
