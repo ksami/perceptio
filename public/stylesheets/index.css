@@ -1,0 +1,89 @@
+/*general*/
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+
+  color: white;
+}
+
+ul > li {
+  margin-right: 40pt;
+}
+
+ul > li:last-child {
+  margin-right: 0;
+}
+
+.container-fluid {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+}
+
+/* navbar */
+
+.navbar{
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.navbar-header h2 {
+  margin-top: 25px;
+}
+
+.brand-logo {
+  width: 50px;
+}
+
+.brand-name {
+  font-family: 'Exo', sans-serif;
+  letter-spacing: 3px;
+  font-size: 32px;
+  margin-left: 10px;
+}
+
+.navbar-item a {
+  font-size: 18px;
+  letter-spacing: 3px;
+  margin-top: 25px;
+  color: white;
+
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.current-scroll {
+  color: #e4b363 !important;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.navbar-nav>li>a {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+/* about */
+
+.section {
+  width: 100%;
+  height: 100%;
+}
+
+#about {
+  background-image: url("/images/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
