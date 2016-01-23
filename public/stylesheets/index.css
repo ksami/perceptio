@@ -117,10 +117,11 @@ ul > li:last-child {
 }
 
 .getting-started-button {
-  background: #E0DFD5;
+  background: transparent;
+  border: solid #ffffff 2px;
   border-radius: 8px;
   font-size: 30px;
-  color: #313637;
+  color: #ffffff;
   letter-spacing: 3.66px;
   line-height: 27px;
   font-weight: 500;
@@ -131,6 +132,17 @@ ul > li:last-child {
   /*display: block;*/
   margin: 0 auto;
   margin-top: 80px;
+
+  color: #ffffff !important;
+  text-decoration: none !important;
+
+}
+
+.getting-started-button:hover {
+  background: #ffffff;
+  opacity: 0.7;
+  color: #212121 !important;
+  text-decoration: none !important;
 }
 
 .text-container {
