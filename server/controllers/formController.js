@@ -6,10 +6,10 @@ var FormController = {
 
   // POST /form
   create: (req, res, next)=>{
-    var valid = Validator.isLineGraph(req.body);
+    var match = Validator.isLineGraph(req.body);
     
-    if(!valid.result){
-      res.send(respond(null, valid.error));
+    if(!match.result){
+      res.send(respond(null, match.error));
     }
     else{
       var lineGraph =  new Models.LineGraph(req.body);
@@ -19,7 +19,7 @@ var FormController = {
         res.send(respond(lineGraph));
       });
     }
-    
+
     next();
   }
 
