@@ -106,21 +106,42 @@ describe('API', ()=>{
   });
 
 
-  describe('/api/realtime', ()=>{
-    it('POST should give id', ()=>{
-      var data = {
-        url: 'https://dweet.io:443/get/latest/dweet/for/c6h12o6c6h12o6',
-        duration: 1000,
-        size: {width: 500, height: 200},
-        color: 'orange'
-      };
-      return post('/api/realtime', data).then(res=>{
-        console.log(res.body.data);
-        assert.isString(res.body.data);
+  // describe('/api/realtime', ()=>{
+  //   it('POST should give id', ()=>{
+  //     var data = {
+  //       url: 'https://dweet.io:443/get/latest/dweet/for/c6h12o6c6h12o6',
+  //       duration: 1000,
+  //       size: {width: 500, height: 200},
+  //       color: 'orange'
+  //     };
+  //     return post('/api/realtime', data).then(res=>{
+  //       console.log(res.body.data);
+  //       assert.isString(res.body.data);
+  //     });
+  //   });
+  // });
+
+
+    describe('/api/three', ()=>{
+      it('POST should give id', ()=>{
+        var data = {
+          points: [
+            {x:-1,y:-1,z:-1,color:'#ff0000'},
+            {x:1,y:-1,z:-1,color:'#ff0000'},
+            {x:-1,y:-1,z:1,color:'#ff0000'},
+            {x:1,y:-1,z:1,color:'#ff0000'},
+            {x:-1,y:1,z:-1,color:'#00ff00'},
+            {x:1,y:1,z:-1,color:'#00ff00'},
+            {x:-1,y:1,z:1,color:'#00ff00'},
+            {x:1,y:1,z:1,color:'#00ff00'},
+          ]
+        };
+        return post('/api/three', data).then(res=>{
+          console.log(res.body.data);
+          assert.isString(res.body.data);
+        });
       });
     });
-  });
-
 
 
   //////////
