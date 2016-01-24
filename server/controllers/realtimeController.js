@@ -5,7 +5,7 @@ var RealtimeController = {
 
   // GET /api/realtime/:id
   getData: (req, res, next)=>{
-    Models.RealtimeGraph.findById(req.params.id, 'url duration size color')
+    Models.RealtimeGraph.findById(req.params.id, 'url duration width height color')
     .exec(function(err, graph){
       res.render('realtime', graph);
     });
