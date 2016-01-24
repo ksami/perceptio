@@ -126,7 +126,7 @@ module.exports = {
 		return {result: false, error: 'err invalid line color'};
 	}
 	//check if duration is number
-	if (!lodash.isNumber(arg.duration)) {
+	if (isNaN(arg.duration)) {
 		return {result: false, error: 'err value NaN'};
 	}
    	 return {result: true, error: null};
