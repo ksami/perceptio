@@ -110,9 +110,9 @@ describe('API', ()=>{
     it('POST should give id', ()=>{
       var data = {
         url: 'https://dweet.io:443/get/latest/dweet/for/c6h12o6c6h12o6',
-        duration: 10000,
+        duration: 1000,
         size: {width: 500, height: 200},
-        color: 'orange'
+        color: 'asdsada'
       };
       return post('/api/realtime', data).then(res=>{
         console.log(res.body.data);
