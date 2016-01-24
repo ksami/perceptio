@@ -16,9 +16,14 @@ angular.module('formApp', ['ngRoute'])
     return $scope.dataType === "dynamic";
   }
 
+  $scope.is3D = function() {
+    return $scope.dataType === "3d";
+  }
+
   $scope.isAllInputsFilled = function() {
     return $scope.dataType && $scope.color && $scope.height && $scope.width &&
-     ( ($scope.isStatic() && $scope.file && $scope.graphType) || ($scope.isDynamic() && $scope.url));
+     ( ($scope.isStatic() && $scope.file && $scope.graphType) || ($scope.isDynamic() && $scope.url) ||
+      ($scope.is3D() && $scope.file));
   }
 
   $scope.uploadFile = function(event) {

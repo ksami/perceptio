@@ -14,11 +14,32 @@ $(function() {
     return datas;
   }
 
+  function extractXYZandColor (line) {
+    var lineSplits = line.split(" ");
+    var datas = [];
+    for(var index=0; index < lineSplits.length; index++) {
+      if(lineSplits[index].length != 0) {
+        datas.push(parseInt(lineSplits[index]));
+      }
+    }
+
+    return datas;
+  }
+
   function makeNodeObject (datas) {
     return {
       x: datas[0],
       y: datas[1]
     };
+  }
+
+  function make3DPoint (datas) {
+    return {
+      x: datas[0],
+      y: datas[1],
+      z: datas[2],
+      color: datas[3]
+    }
   }
 
   function readSingleFile(file, width, height, color, graphType) {
@@ -31,17 +52,30 @@ $(function() {
         var contents = e.target.result;
         var lines = contents.split('\n');
         for(var index in lines){
-          var datas = extractXandY(lines[index]);
-          var node = makeNodeObject(datas);
+          var datas;
+          var node;
+
+          if(graphType === "static") {
+            datas = extractXandY(lines[index]);
+            var node = makeNodeObject(datas);
+          } else if(graphType === "3d") {
+            datas = extractXYZandColor(lines[index]);
+            node = make3DPoint(datas);
+          }
+
           nodes.push(node);
         }
 
-        var chart = {
-          nodes: nodes,
-          color: color
-        }
+        if(graphType === "static") {
+          var chart = {
+            nodes: nodes,
+            color: color
+          }
 
-        drawGraph(width, height, chart, "#graph-container", graphType);
+          drawGraph(width, height, chart, "#graph-container", graphType);
+        } else if(graphType === "3d") {
+          return nodes;
+        }
 
       }
       r.readAsText(file);
@@ -219,7 +253,7 @@ $(function() {
 
     if($scope.isStatic()) {
       $('#graph-modal').modal();
-    } else {
+    } else if($scope.isDynamic()) {
 
       var data = {
         url: $scope.url,
@@ -241,7 +275,27 @@ $(function() {
           }
         }
       });
+    } else if($scope.is3D()) {
+      var file = $scope.file;
+      var width = $scope.width;
+      var height = $scope.height;
+      var color = $scope.color;
+      var graphType = $scope.graphType;
 
+      var points = readSingleFile(file, width, height, color, graphType);
+
+      $.post({
+        url: "/api/three",
+        data: data,
+        success: function(result) {
+          if(result != null) {
+            data = result.data;
+            if(data != null) {
+              location.href = "/api/three/" + data;
+            }
+          }
+        }
+      });
 
     }
 

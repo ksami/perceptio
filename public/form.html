@@ -63,6 +63,7 @@
             <select class="form-control" ng-model="dataType">
               <option value="static">Static</option>
               <option value="dynamic">Dynamic</option>
+              <option value="3d">3D space</option>
             </select>
           </div>
 
@@ -90,7 +91,7 @@
             <i class="control-label" style="font-size: 14px;" ng-show="isOutOfBound(height, 200, 1000)">height should be between 200px and 1000px </i>
           </div>
 
-          <div class="form-group" ng-show="isStatic()">
+          <div class="form-group" ng-show="isStatic() || is3D()">
             <label for="graphData">Your Data</label>
             <input type="file" id="file" custom-on-change="uploadFile">
           </div>
