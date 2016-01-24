@@ -91,8 +91,8 @@ ul > li:last-child {
 
 .section-divider {
   width: 100%;
-  height: 75px;
-  background-color: #ecf0f1;
+  height: 70px;
+  background-color: #e0e0e0;
 
 }
 
@@ -135,7 +135,7 @@ ul > li:last-child {
   font-weight: 500;
   /*letter-spacing: 3px;*/
 
-  padding: 50px;
+  padding: 30px 40px;
 
   /*display: block;*/
   margin: 0 auto;
@@ -182,7 +182,7 @@ ul > li:last-child {
 }
 
 .half-section-container {
-  margin-top: 30px;
+  margin-top: 80px;
 }
 
 #getting-started .half-section {
@@ -195,4 +195,23 @@ ul > li:last-child {
 
 .static-section {
 
+}
+
+.how-to-use-list {
+  font-size: 20px;
+}
+
+#separator {
+  height: 10px;
+  background-color: #e0e0e0;
+}
+
+#footer {
+  height: 50px;
+  background-color: #212121;
+}
+
+#footer-text {
+  font-family: 'Exo', sans-serif;
+  color: #ffffff;
 }
