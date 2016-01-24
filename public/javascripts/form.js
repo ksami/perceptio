@@ -21,12 +21,11 @@ $(function() {
     };
   }
 
-  function readSingleFile(evt) {
+  function readSingleFile(file, width, height, color) {
     //Retrieve the first (and only!) File from the FileList object
-    var f = evt.target.files[0];
     var nodes = [];
 
-    if (f) {
+    if (file) {
       var r = new FileReader();
       r.onload = function(e) {
         var contents = e.target.result;
@@ -39,13 +38,13 @@ $(function() {
 
         var chart = {
           nodes: nodes,
-          color: "#0000ff"
+          color: color
         }
 
-        drawGraph(1000, 500, chart, "#container");
+        drawGraph(width, height, chart, "#graph-container");
 
       }
-      r.readAsText(f);
+      r.readAsText(file);
     } else {
       alert("Failed to load file");
     }
@@ -117,6 +116,61 @@ $(function() {
         .attr('fill', 'none');
   }
 
-  document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+
+  // form
+  $('#submit-btn').click(function() {
+    var $scope = angular.element(document.getElementById('form')).scope();
+
+    if($scope.isStatic()) {
+      $('#graph-modal').modal();
+    } else {
+
+      var data = {
+        url: $scope.url,
+        duration: 10000,
+        width: $scope.width,
+        height: $scope.height,
+        color: $scope.color
+      };
+
+      $.post({
+        url: "/api/realtime",
+        data: data,
+        success: function(result) {
+          if(result != null) {
+            data = result.data;
+            if(data != null) {
+              location.href = "/api/realtime/" + data;
+            }
+          }
+        }
+      });
+
+
+    }
+
+  });
+
+  // modal
+  $('#graph-modal').on("shown.bs.modal", function() {
+    var $scope = angular.element(document.getElementById('form')).scope();
+    var file = $scope.file;
+    var width = $scope.width;
+    var height = $scope.height;
+    var color = $scope.color;
+
+    readSingleFile(file, width, height, color);
+  });
+
+  $('#graph-modal').on("hidden.bs.modal", function() {
+    var graphContainer = $(this).find("#graph-container");
+    graphContainer.empty();
+  });
+
+  $('#export-button').click(function() {
+    var svg = $('#graph-container svg')[0];
+    saveSvgAsPng(svg, "diagram.png");
+  })
+
 
 });

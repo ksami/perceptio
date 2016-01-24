@@ -9,6 +9,9 @@ var app = express();
 
 var mongoose = require('mongoose');
 
+// use jade for rendering
+app.set('view engine', 'jade');
+
 // middleware for body parsing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
