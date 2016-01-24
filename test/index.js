@@ -115,6 +115,7 @@ describe('API', ()=>{
         color: 'orange'
       };
       return post('/api/realtime', data).then(res=>{
+        console.log(res.body.data);
         assert.isString(res.body.data);
       });
     });
