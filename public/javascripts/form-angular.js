@@ -28,6 +28,10 @@ angular.module('formApp', ['ngRoute'])
     }
   }
 
+  $scope.isOutOfBound = function(value, min, max) {
+    return value < min || value > max;
+  }
+
 }])
 
 .directive('customOnChange', function() {
