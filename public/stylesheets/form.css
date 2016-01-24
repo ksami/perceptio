@@ -6,9 +6,10 @@ html, body {
   margin: 0;
   padding: 0;
   background: #eeeeee;
-  /*
-  background-image: url("../images/bg-form.jpg");
-  background-size: 100% 100%;
+  
+  /*background-image: url("../images/background-form.jpg");*/
+  background-color: #37474f;
+  /*background-size: 100% 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
   */
@@ -30,6 +31,14 @@ ul > li:last-child {
   margin-right: 0;
 }
 
+.hover-text {
+  padding: 17px !important;
+}
+
+.hover-text:hover {
+  /*color: #e4b363 !important;*/
+  border-bottom: solid 3px #424242;
+}
 
 .navbar{
   position: fixed;
@@ -40,6 +49,8 @@ ul > li:last-child {
   background-color: #e0e0e0;
   border-color: transparent;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+
+  z-index: 3;
 }
 
 .navbar-header h2 {
@@ -127,11 +138,25 @@ ul > li:last-child {
 	border-radius: 30px;
 	border: solid #bdbdbd 2px;
 	background-color: #f5f5f5;
+	opacity: 0.95;
 }
 
 .title {
 	font-family: 'Play', sans-serif;
 	font-weight: 700;
+	font-size: 20px;
+
+	color: #ffffff;
+/*
+   -webkit-text-stroke: 1px black;
+   color: white;
+   text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+*/
 }
 
 .form-table {
@@ -146,6 +171,8 @@ ul > li:last-child {
 	border-radius: 20px;
 	border: solid 1px #bdbdbd;
 	margin-bottom: 40px;
+
+	opacity: 0.9;
 }
 
 .inner-contents {
@@ -169,7 +196,7 @@ ul > li:last-child {
 }
 
 #separator {
-  height: 8px;
+  height: 3px;
   background-color: #e0e0e0;
 }
 
