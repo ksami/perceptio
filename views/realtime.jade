@@ -34,14 +34,14 @@ body
 
     script(src="http://code.jquery.com/jquery-1.11.3.min.js")
     script(src="http://d3js.org/d3.v3.min.js")
-    
+
     script.
         var limit = 60 * 1,
             duration = #{duration},
             now = new Date(Date.now() - duration)
 
-        var width = #{size.width},
-            height = #{size.height};
+        var width = #{width},
+            height = #{height};
 
         //- var groups = {
             var group = {

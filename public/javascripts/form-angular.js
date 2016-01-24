@@ -2,11 +2,12 @@ angular.module('formApp', ['ngRoute'])
 
 .controller('formController', ['$scope', function($scope) {
 
-  $scope.type = "static";
+  $scope.type = "dynamic";
   $scope.color = "#f44336";
   $scope.file = "";
   $scope.height = 500;
   $scope.width = 500;
+  $scope.url = "https://dweet.io:443/get/latest/dweet/for/c6h12o6c6h12o6";
 
   $scope.isStatic = function() {
     return $scope.type === "static";

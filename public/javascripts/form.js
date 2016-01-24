@@ -125,6 +125,28 @@ $(function() {
       $('#graph-modal').modal();
     } else {
 
+      var data = {
+        url: $scope.url,
+        duration: 10000,
+        width: $scope.width,
+        height: $scope.height,
+        color: $scope.color
+      };
+
+      $.post({
+        url: "/api/realtime",
+        data: data,
+        success: function(result) {
+          if(result != null) {
+            data = result.data;
+            if(data != null) {
+              location.href = "/api/realtime/" + data;
+            }
+          }
+        }
+      });
+
+
     }
 
   });
