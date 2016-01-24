@@ -57,6 +57,12 @@ $(function() {
 
     var lines = chart.nodes;
 
+    var svg = d3.select(container)
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
     if(graphType === "line-chart" || graphType === "smooth-chart" || graphType === "area-chart") {
 
       // draw axis
@@ -86,12 +92,6 @@ $(function() {
       var yAxis = d3.svg.axis().scale(yRange).tickSize(5)
           .orient('left')
           .tickSubdivide(true);
-
-      var svg = d3.select(container)
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height)
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       svg.append("svg:g")
         .attr("class", "x axis")
@@ -155,6 +155,50 @@ $(function() {
           .attr("fill", chart.color);
 
       }
+
+    } else if(graphType === "bar-chart") {
+
+      xRange = d3.scale.ordinal().rangeRoundBands([margin.left, width - margin.right], 0.1)
+      .domain(lines.map(function(d) {
+        return d.x;
+      }));
+
+      yRange = d3.scale.linear().range([height - margin.top, margin.bottom])
+        .domain([0, d3.max(lines, function(d) {
+          return d.y;
+        })]);
+
+      var xAxis = d3.svg.axis().scale(xRange).tickSize(5)
+        .tickSubdivide(true);
+      var yAxis = d3.svg.axis().scale(yRange).tickSize(5)
+          .orient('left')
+          .tickSubdivide(true);
+
+      svg.append('svg:g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0,' + (height - margin.bottom) + ')')
+        .call(xAxis);
+
+      svg.append('svg:g')
+        .attr('class', 'y axis')
+        .attr('transform', 'translate(' + (margin.left) + ',0)')
+        .call(yAxis);
+
+      svg.selectAll('rect')
+        .data(lines)
+        .enter()
+        .append('rect')
+        .attr('x', function(d) { // sets the x position of the bar
+          return xRange(d.x);
+        })
+        .attr('y', function(d) { // sets the y position of the bar
+          return yRange(d.y);
+        })
+        .attr('width', xRange.rangeBand()) // sets the width of bar
+        .attr('height', function(d) {      // sets the height of bar
+          return ((height - margin.bottom) - yRange(d.y));
+        })
+        .attr('fill', chart.color);
 
     }
 
