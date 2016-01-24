@@ -31,8 +31,8 @@
         <form id="form">
 
           <div class="form-group">
-            <label for="graphType">Graph Type</label>
-            <select class="form-control" ng-model="type">
+            <label for="dataType">Data Type</label>
+            <select class="form-control" ng-model="dataType">
               <option value="static">Static</option>
               <option value="dynamic">Dynamic</option>
             </select>
@@ -63,6 +63,16 @@
           <div class="form-group" ng-show="isStatic()">
             <label for="graphData">Your Data</label>
             <input type="file" id="file" custom-on-change="uploadFile">
+          </div>
+
+          <div class="form-group" ng-show"isStatic()">
+            <label for="graphType">Graph Type</label>
+            <select class="form-control" ng-model="graphType">
+              <option value="line-chart">Line Chart</option>
+              <option value="smooth-chart">Smooth Chart</option>
+              <option value="area-chart">Area Chart</option>
+              <option value="bar-chart">Bar Chart</option>
+            </select>
           </div>
 
           <div class="form-group" ng-show="isDynamic()">

@@ -58,6 +58,10 @@ html, body {
   fill: FireBrick;
 }
 
+.area {
+  transform: translateY(-20px);
+}
+
 /* form */
 
 .logo {

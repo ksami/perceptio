@@ -21,7 +21,7 @@ $(function() {
     };
   }
 
-  function readSingleFile(file, width, height, color) {
+  function readSingleFile(file, width, height, color, graphType) {
     //Retrieve the first (and only!) File from the FileList object
     var nodes = [];
 
@@ -41,7 +41,7 @@ $(function() {
           color: color
         }
 
-        drawGraph(width, height, chart, "#graph-container");
+        drawGraph(width, height, chart, "#graph-container", graphType);
 
       }
       r.readAsText(file);
@@ -52,68 +52,112 @@ $(function() {
 
   // draw graph
 
-  function drawGraph(width, height, chart, container) {
+  function drawGraph(width, height, chart, container, graphType) {
     var margin = {top: 20, right: 20, bottom: 20, left: 50};
 
     var lines = chart.nodes;
 
-    // draw axis
-    var xRange = d3.scale.linear()
-      .range([margin.left, width - margin.right])
-      .domain([
-        d3.min(lines, function(d) {
-          return d.x;
-        }),
-        d3.max(lines, function(d) {
-          return d.x;
-        })
-      ]);
-    var yRange = d3.scale.linear()
-      .range([height - margin.top, margin.bottom])
-      .domain([
-        d3.min(lines, function(d) {
-          return d.y;
-        }),
-        d3.max(lines, function(d) {
-          return d.y;
-        })
-      ]);
+    if(graphType === "line-chart" || graphType === "smooth-chart" || graphType === "area-chart") {
 
-    var xAxis = d3.svg.axis().scale(xRange).tickSize(5)
-        .tickSubdivide(true);
-    var yAxis = d3.svg.axis().scale(yRange).tickSize(5)
-        .orient('left')
-        .tickSubdivide(true);
+      // draw axis
+      var xRange = d3.scale.linear()
+        .range([margin.left, width - margin.right])
+        .domain([
+          d3.min(lines, function(d) {
+            return d.x;
+          }),
+          d3.max(lines, function(d) {
+            return d.x;
+          })
+        ]);
+      var yRange = d3.scale.linear()
+        .range([height - margin.top, margin.bottom])
+        .domain([
+          d3.min(lines, function(d) {
+            return d.y;
+          }),
+          d3.max(lines, function(d) {
+            return d.y;
+          })
+        ]);
 
-    var svg = d3.select(container)
-              .append("svg")
-              .attr("width", width)
-              .attr("height", height);
+      var xAxis = d3.svg.axis().scale(xRange).tickSize(5)
+          .tickSubdivide(true);
+      var yAxis = d3.svg.axis().scale(yRange).tickSize(5)
+          .orient('left')
+          .tickSubdivide(true);
 
-    svg.append("svg:g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + (height - margin.bottom) + ")")
-      .call(xAxis);
+      var svg = d3.select(container)
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    svg.append("svg:g")
-      .attr("class", "y axis")
-      .attr("transform", "translate(" + margin.left + ",0)")
-      .call(yAxis);
+      svg.append("svg:g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + (height - margin.bottom) + ")")
+        .call(xAxis);
 
-    var lineFunc = d3.svg.line()
-      .x(function(d) {
-        return xRange(d.x);
-      })
-      .y(function(d) {
-        return yRange(d.y);
-      })
-      .interpolate('basis');
+      svg.append("svg:g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + margin.left + ",0)")
+        .call(yAxis);
 
-    svg.append("svg:path")
-        .attr('d', lineFunc(lines))
-        .attr('stroke', chart.color)
-        .attr('stroke-width', 2)
-        .attr('fill', 'none');
+
+      if(graphType === "line-chart") {
+
+        /* line chart */
+        var line = d3.svg.line()
+          .x(function(d) {
+            return xRange(d.x);
+          })
+          .y(function(d) {
+            return yRange(d.y);
+          });
+
+        svg.append("path")
+          .attr("class", "line")
+          .attr("d", line(lines))
+          .attr('stroke', chart.color)
+          .attr('stroke-width', 2)
+          .attr('fill', 'none');
+
+      } else if(graphType === "smooth-chart") {
+
+        /* interpolar line graph */
+        var lineFunc = d3.svg.line()
+          .x(function(d) {
+            return xRange(d.x);
+          })
+          .y(function(d) {
+            return yRange(d.y);
+          })
+          .interpolate('basis');
+
+        svg.append("svg:path")
+            .attr('d', lineFunc(lines))
+            .attr('stroke', chart.color)
+            .attr('stroke-width', 2)
+            .attr('fill', 'none');
+
+      } else if(graphType === "area-chart") {
+
+        /* area graph */
+        var area = d3.svg.area()
+          .x(function(d) { return xRange(d.x); })
+          .y0(height)
+          .y1(function(d) { return yRange(d.y); });
+
+        svg.append("path")
+          .datum(lines)
+          .attr("class", "area")
+          .attr("d", area)
+          .attr("fill", chart.color);
+
+      }
+
+    }
+
   }
 
 
@@ -158,8 +202,9 @@ $(function() {
     var width = $scope.width;
     var height = $scope.height;
     var color = $scope.color;
+    var graphType = $scope.graphType;
 
-    readSingleFile(file, width, height, color);
+    readSingleFile(file, width, height, color, graphType);
   });
 
   $('#graph-modal').on("hidden.bs.modal", function() {
