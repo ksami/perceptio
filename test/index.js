@@ -111,7 +111,8 @@ describe('API', ()=>{
       var data = {
         url: 'https://dweet.io:443/get/latest/dweet/for/c6h12o6c6h12o6',
         duration: 1000,
-        size: {width: 500, height: 200},
+        width: 500,
+        height: 200,
         color: 'orange'
       };
       return post('/api/realtime', data).then(res=>{
