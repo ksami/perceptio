@@ -6,7 +6,7 @@ html, body {
   margin: 0;
   padding: 0;
   background: #eeeeee;
-  
+
   background-color: #37474f;*/
   /*background-image: url("../images/background-form.jpg");*/
   /*background-size: 100% 100%;
@@ -156,11 +156,16 @@ ul > li:last-child {
    color: white;
    text-shadow:
        3px 3px 0 #000,
-     -1px -1px 0 #000,  
+     -1px -1px 0 #000,
       1px -1px 0 #000,
       -1px 1px 0 #000,
        1px 1px 0 #000;
 */
+}
+
+.submit-btn {
+  font-size: 20px;
+  padding: 12px 30px;
 }
 
 .form-table {
@@ -190,10 +195,6 @@ ul > li:last-child {
 	color: #616161 !important;
 }
 
-.export-btn-container {
-
-}
-
 .export-btn {
   margin: 20px;
   font-size: 20px;
@@ -212,4 +213,17 @@ ul > li:last-child {
 #footer-text {
   font-family: 'Exo', sans-serif;
   color: #ffffff;
+}
+
+
+/* modal */
+
+.modal {
+  font-family: 'Exo', sans-serif;
+}
+
+button.close {
+  font-size: 40px !important;
+  margin-right: 15px;
+  color: #212121 !important;
 }

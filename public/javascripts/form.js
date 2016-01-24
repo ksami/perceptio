@@ -198,7 +198,15 @@ $(function() {
         .attr('height', function(d) {      // sets the height of bar
           return ((height - margin.bottom) - yRange(d.y));
         })
-        .attr('fill', chart.color);
+        .attr('fill', chart.color)
+        .on('mouseover', function(d) {
+          d3.select(this)
+            .attr('fill', '#2c3e50');
+        })
+        .on('mouseout', function(d) {
+          d3.select(this)
+            .attr('fill', chart.color);
+        });
 
     }
 
