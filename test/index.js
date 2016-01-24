@@ -42,7 +42,7 @@ describe('API', ()=>{
     post = function(url, data){
       return new Promise((resolve, reject)=>{
         superagent
-        .post('http://localhost:8080'+url)
+        .post(url)
         .type('json')
         .send(data)
         .end((err, res)=>{
@@ -140,17 +140,27 @@ describe('API', ()=>{
       it('POST should give id', ()=>{
         var data = {
           points: [
-            {x:-1,y:-1,z:-1,color:'#ff0000'},
-            {x:1,y:-1,z:-1,color:'#ff0000'},
-            {x:-1,y:-1,z:1,color:'#ff0000'},
-            {x:1,y:-1,z:1,color:'#ff0000'},
-            {x:-1,y:1,z:-1,color:'#00ff00'},
-            {x:1,y:1,z:-1,color:'#00ff00'},
-            {x:-1,y:1,z:1,color:'#00ff00'},
-            {x:1,y:1,z:1,color:'#00ff00'},
+            // {x:-1,y:-1,z:-1,color:'#ff0000'},
+            // {x:1,y:-1,z:-1,color:'#ff0000'},
+            // {x:-1,y:-1,z:1,color:'#ff0000'},
+            // {x:1,y:-1,z:1,color:'#ff0000'},
+            // {x:-1,y:1,z:-1,color:'#00ff00'},
+            // {x:1,y:1,z:-1,color:'#00ff00'},
+            // {x:-1,y:1,z:1,color:'#00ff00'},
+            // {x:1,y:1,z:1,color:'#00ff00'}
           ]
         };
-        return post('/api/three', data).then(res=>{
+
+        for(var i=0; i<1000; i++){
+          data.points.push({
+            x: (Math.random()*200)-100,
+            y: (Math.random()*200)-100,
+            z: (Math.random()*200)-100,
+            color: '#'+Math.floor(Math.random()*16777215).toString(16)
+          });
+        }
+
+        return post('http://vposter-i.comp.nus.edu.sg:8080/api/three/', data).then(res=>{
           console.log(res.body.data);
           assert.isString(res.body.data);
         });
